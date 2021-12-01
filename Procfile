@@ -1,1 +1,1 @@
-web: gunicorn cryptoscraping.wsgi
+web: gunicorn cryptoscraping.wsgi --log-file -
