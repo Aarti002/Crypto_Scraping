@@ -1,0 +1,183 @@
+{% load mathfilters %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <link rel="shortcut icon" href="favicon.png" type="image/png">
+    <title>Crypto Django API</title>
+    <style>
+        body {
+            background-color:#B4C6A6;
+            color: white;
+        }
+
+        * {
+            color: white;
+        }
+
+        img {
+            height: 2rem;
+            width: 2rem;
+        }
+
+        label {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.btn {
+    margin-top: 2rem;
+    padding: 7px 21px;
+    background-color: rgb(143, 1, 1);
+    color: white;
+    font-size: 18px;
+}
+
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Crypto API Django</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <form class="d-flex ms-auto">
+                    <input class="form-control me-2" type="search" placeholder="Search Crypto" aria-label="Search" id="myInput">
+
+                </form>
+            </div>
+            <button><a href="register" style="text-decoration:none; font-size:1.2rem; color: black;">Register Now!</a> </button>
+        </div>
+    </nav>
+    <section>
+                            <div class="form-group">
+                              {% if messages %}
+                                {% for message in messages %}
+                                {% if message.tags == 'error' %}
+                                <div class="alert alert-danger" style="margin-top:10px">{{ message }}
+                                <button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                </div>
+                                {% endif %}
+                                {% if message.tags == 'success' %}
+                                <div class="alert alert-success" style="margin-top:10px">{{ message }}
+                                <button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                </div>
+                                {% endif %}
+                                {% endfor %}
+                              {% endif %}
+                            </div>
+        <div class="container py-5">
+            <div class="table-responsive text-white">
+                 <h2>ATH Table</h2>
+                <table class="table table-striped text-center table-hover table-bordered" style="border:2px solid black;">
+                    <thead>
+                        <tr>
+                            <th scope="col" style="color:black; border:2px solid black;">ID</th>
+                            <th scope="col" style="color:black; border:2px solid black;">Name</th>
+                            <th scope="col" style="color:black; border:2px solid black;">Image</th>
+                            <th scope="col" style="color:black; border:2px solid black;">Symbol</th>
+                            <th scope="col" style="color:black; border:2px solid black;">Current Price</th>
+                            <th scope="col" style="color:black; border:2px solid black;">ATL</th>
+                            <th scope="col" style="color:black; border:2px solid black;">ATL Date & Time</th>
+                            <th scope="col" style="color:black; border:2px solid black;">ATH</th>
+                            <th scope="col" style="color:black; border:2px solid black;">ATH Date & Time</th>
+                        </tr>
+                    </thead>
+                    <tbody id="myTable1">
+                        {% for i in apidata %}
+                        <tr>
+                            {% if i.current_price <= i.ath|mul:1.1 and i.current_price >= i.ath|mul:0.9 %}
+                            <td style="color:black; border:2px solid black; ">{{i.id}}</td>
+                            <td style="border:2px solid black;"><h5 style="color: rgb(0, 255, 229); ">{{i.name}}</h5></td>
+                            <td style="color:rgb(0, 255, 229); border:2px solid black;"><img src="{{ i.image }}"></td>
+                            <td style="color:rgb(0, 255, 229); border:2px solid black;">{{i.symbol}}</td>
+                            <td style="color:rgb(0, 255, 229); border:2px solid black;">{{i.current_price}}</td>
+                            <td style="color:rgb(0, 255, 229); border:2px solid black;">{{i.atl}}</td>
+                            <td style="color:rgb(0, 255, 229); border:2px solid black;">{{i.atl_date}}</td>
+                            <td style="color:rgb(0, 255, 229); border:2px solid black;">{{i.ath}}</td>
+                            <td style="color:rgb(0, 255, 229); border:2px solid black;">{{i.ath_date}}</td>
+                            {% endif %}
+                        </tr>
+                        {% endfor %}
+
+                    </tbody>
+                </table>
+                 <h2>ATL Table</h2>
+                <table class="table table-striped text-center table-hover table-bordered" style="border:2px solid black;">
+                    <thead>
+                        <tr>
+                            <th scope="col" style="color:black; border:2px solid black;">ID</th>
+                            <th scope="col" style="color:black; border:2px solid black;">Name</th>
+                            <th scope="col" style="color:black; border:2px solid black;">Image</th>
+                            <th scope="col" style="color:black; border:2px solid black;">Symbol</th>
+                            <th scope="col" style="color:black; border:2px solid black;">Current Price</th>
+                            <th scope="col" style="color:black; border:2px solid black;">ATL</th>
+                            <th scope="col" style="color:black; border:2px solid black;">ATL Date & Time</th>
+                            <th scope="col" style="color:black; border:2px solid black;">ATH</th>
+                            <th scope="col" style="color:black; border:2px solid black;">ATH Date & Time</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="myTable">
+
+                        {% for i in apidata %}
+                        <tr>
+                            {% if i.current_price >= i.atl|mul:0.9 and i.current_price <= i.atl|mul:1.1 %}
+                            <td style="color:black; border:2px solid black;">{{i.id}}</td>
+                            <td style="border:2px solid black;"><h5 style="color: rgb(0, 255, 229); ">{{i.name}}</h5></td>
+                            <td style="color:rgb(0, 255, 229) border:2px solid black;;"><img src="{{ i.image }}"></td>
+                            <td style="color:rgb(0, 255, 229); border:2px solid black;">{{i.symbol}}</td>
+                            <td style="color:rgb(0, 255, 229); border:2px solid black;">{{i.current_price}}</td>
+                            <td style="color:rgb(0, 255, 229); border:2px solid black;">{{i.atl}}</td>
+                            <td style="color:rgb(0, 255, 229); border:2px solid black;">{{i.atl_date}}</td>
+                            <td style="color:rgb(0, 255, 229); border:2px solid black;">{{i.ath}}</td>
+                            <td style="color:rgb(0, 255, 229); border:2px solid black;">{{i.ath_date}}</td>
+                            {% endif %}
+                        </tr>
+                        {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <button><a href="send_email" style="text-decoration:none; font-size:1.2rem; color: black;">Send Mail</a> </button>
+
+
+    </section>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8"
+        crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+            $("#myInput").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#myTable tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+
+</body>
+
+</html>
