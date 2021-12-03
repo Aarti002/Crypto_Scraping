@@ -1,6 +1,6 @@
 import requests
 from django.contrib import messages
-from django.core.mail import send_mail, BadHeaderError
+from django.core.mail import send_mail, BadHeaderError, send_mass_mail
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 from django.template.loader import render_to_string
@@ -60,8 +60,16 @@ def send_email(request):
     for rec in ans:
         receivers.append(rec['email'])
     print(receivers)
-    messages.success(request,"Message Delivered!")
-    send_mail(subject, message, 'aartikumarisingh120@gmail.com', receivers,html_message=html_message)
+    try:
+
+        send_mail(subject, message, 'aartikumarisingh120@gmail.com', receivers, html_message=html_message)
+        messages.success(request, "Message Delivered!")
+        print('successfully sent the mail')
+    except:
+        messages.error(request, "Message not delivered!")
+
+
+
     return HttpResponseRedirect('/')
 
 
