@@ -9,7 +9,8 @@ from django.utils.html import strip_tags
 
 from .models import SubscribedUsers
 
-
+def temp(request):
+    return render(request,'index1.html')
 
 def register(request):
     return render(request, 'register_user.html')

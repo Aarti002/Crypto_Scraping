@@ -17,10 +17,12 @@ from django.contrib import admin
 from django.urls import path
 from cryptoapp import views
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.index,name="index"),
     path('register/', views.register, name='register'),
     path('register_save', views.register_save, name='register_save'),
     path('send_email', views.send_email, name='send_email'),
+    path('temp/',views.temp,name="temp"),
 ]
