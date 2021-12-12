@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-b*(dy$t7gcf!b_#bienepepp_(jwcvl)xl2it8k=w5^mo%v8qc'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -42,7 +42,17 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'cryptoapp',
     'mathfilters',
+    'django_q',
 ]
+
+# Configure your Q cluster
+# More details https://django-q.readthedocs.io/en/latest/configure.html
+Q_CLUSTER = {
+    "name": "shop",
+    'retry': 30,
+    'timeout': 10,
+    "orm": "default",  # Use Django's ORM + database for broker
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
