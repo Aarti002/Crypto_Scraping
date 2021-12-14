@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-b*(dy$t7gcf!b_#bienepepp_(jwcvl)xl2it8k=w5^mo%v8qc'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'cryptoapp',
     'mathfilters',
     'django_q',
+'django_celery_beat',
 ]
 
 # Configure your Q cluster
@@ -157,3 +158,23 @@ db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
 # Activate Django-Heroku.
 django_heroku.settings(locals())
+
+#celery part
+CELERY_BROKER_URL = 'redis://127.0.0.1:6379'
+CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_TIMEZONE = "Asia/Kolkata"
+#app.conf.enable_utc = False
+from celery.schedules import crontab
+CELERY_BEAT_SCHEDULE = {
+ 'send-mail-every-hour': {
+       'task': 'cryptoapp.tasks.sending_crypto_info',
+        # There are 4 ways we can handle time, read further
+       'schedule': crontab(minute=0, hour='18'),
+        # If you're using any arguments
+       'args': ('We don’t need any',),
+    },
+
+}
