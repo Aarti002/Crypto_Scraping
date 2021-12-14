@@ -42,18 +42,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'cryptoapp',
     'mathfilters',
-    'django_q',
 'django_celery_beat',
 ]
 
-# Configure your Q cluster
-# More details https://django-q.readthedocs.io/en/latest/configure.html
-Q_CLUSTER = {
-    "name": "shop",
-    'retry': 30,
-    'timeout': 10,
-    "orm": "default",  # Use Django's ORM + database for broker
-}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
