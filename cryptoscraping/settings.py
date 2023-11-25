@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 #Hosting part
 import os
-import django_heroku
 
 from pathlib import Path
 
@@ -26,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-b*(dy$t7gcf!b_#bienepepp_(jwcvl)xl2it8k=w5^mo%v8qc'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -42,7 +41,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'cryptoapp',
     'mathfilters',
-
 ]
 
 
@@ -82,8 +80,14 @@ WSGI_APPLICATION = 'cryptoscraping.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        # 'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'crypto_monitoring_application',
+        'USER': 'root',
+        'PASSWORD': 'root',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
 
@@ -125,28 +129,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT=os.path.join(BASE_DIR,"static")
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-#For sending emails
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_USE_TLS = True
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'aartikumarisingh120@gmail.com'
-EMAIL_HOST_PASSWORD = 'Aarti001$%'
-
-#Hosting part
-import os
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-STATICFILES_STORAGE='whitenoise.storage.CompressedManifestStaticFilesStorage'
-
-import dj_database_url
-db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
-# Activate Django-Heroku.
-django_heroku.settings(locals())
-

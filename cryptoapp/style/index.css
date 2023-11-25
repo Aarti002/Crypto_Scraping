@@ -1,0 +1,131 @@
+
+
+body {
+  background-color: #47e4b2;
+  color: black;
+  
+}
+
+* {
+  color: white;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 20px;
+}
+
+th,
+td {
+  border: 1px solid black;
+  padding: 8px;
+  text-align: center;
+}
+
+th {
+  border-width: 1px 1px 0;
+  background-color: #f7f7f7;
+}
+
+.content {
+  margin: 20px;
+}
+
+.pagination {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.pagination button {
+  padding: 5px 10px;
+  margin: 0 5px;
+  cursor: pointer;
+  outline: 1px solid #494a4f;
+  border-radius: 1px;
+  border: none;
+}
+
+.hidden {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.pagination button.active {
+  background-color: #007bff;
+  color: white;
+}
+
+
+img {
+  height: 2rem;
+  width: 2rem;
+}
+
+label {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.btn {
+  margin-top: 2rem;
+  padding: 7px 21px;
+  background-color: rgb(143, 1, 1);
+  color: white;
+  font-size: 18px;
+}
+
+.heading {
+  margin-top: 0.5rem;
+  font-family: "Nunito Sans", sans-serif;
+  justify-content: center;
+  text-align: center;
+}
+
+.button-33 {
+  background-color: #b8e4f0;
+  border-radius: 100px;
+  box-shadow: rgba(44, 187, 99, 0.2) 0 -25px 18px -14px inset,
+    rgba(44, 187, 99, 0.15) 0 1px 2px, rgba(44, 187, 99, 0.15) 0 2px 4px,
+    rgba(44, 187, 99, 0.15) 0 4px 8px, rgba(44, 187, 99, 0.15) 0 8px 16px,
+    rgba(44, 187, 99, 0.15) 0 16px 32px;
+  color: green;
+  cursor: pointer;
+  display: inline-block;
+  font-family: CerebriSans-Regular, -apple-system, system-ui, Roboto, sans-serif;
+  padding: 7px 20px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 250ms;
+  border: 0;
+  font-size: 16px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-33:hover {
+  box-shadow: rgba(44, 187, 99, 0.35) 0 -25px 18px -14px inset,
+    rgba(44, 187, 99, 0.25) 0 1px 2px, rgba(44, 187, 99, 0.25) 0 2px 4px,
+    rgba(44, 187, 99, 0.25) 0 4px 8px, rgba(44, 187, 99, 0.25) 0 8px 16px,
+    rgba(44, 187, 99, 0.25) 0 16px 32px;
+  transform: scale(1.05);
+  font-weight: 900;
+}
+
+.butt {
+  margin-left: 47%;
+  justify-content: center;
+  align-items: center;
+}
+
+.about {
+  margin-top: 2.5rem;
+  margin-bottom: auto;
+  text-align: center;
+}

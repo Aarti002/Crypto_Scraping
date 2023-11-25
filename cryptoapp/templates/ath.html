@@ -159,7 +159,7 @@ label {
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <img src="logo.png" alt="logo">
-      <a class="navbar-brand" href="">CMS</a>
+      <a class="navbar-brand" href="#">CMS</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -174,9 +174,8 @@ label {
         </ul>
       </div>
     </nav>
-    <h1 class="heading">Crypto Monitoring System</h1>
-    
-    <section>
+    <h3 class="heading">List of Coins having Current Price in 20% range of ATH </h3>
+
       <div class="container">
         <article class="content">
         <table class="table table-striped table-class" id="table-id">
@@ -203,19 +202,13 @@ label {
               <th scope="col" style="color: black; border: 2px solid black">
                 ATH Date & Time
               </th>
-              <th scope="col" style="color: black; border: 2px solid black">
-                ATL
-              </th>
-              <th scope="col" style="color: black; border: 2px solid black">
-                ATL Date & Time
-              </th>
             </tr>
           </thead>
 
           <tbody id="table-content">
             {% for coin in coin_details %}
-            
               <tr>
+                {% if coin.current_price <= coin.ath|mul:1.2 and coin.current_price >= coin.ath|mul:0.8 %}
                 <td>{{coin.name}}</td>
                 <td>{{coin.symbol}}</td>
                 <td>{{coin.current_price}}</td>
@@ -223,8 +216,7 @@ label {
                 <td>{{coin.low_24h}}</td>
                 <td>{{coin.ath}}</td>
                 <td>{{coin.ath_date}}</td>
-                <td>{{coin.atl}}</td>
-                <td>{{coin.atl_date}}</td>
+                {% endif %}
               </tr>
              
             {% endfor %}
@@ -235,7 +227,7 @@ label {
         <!--		Start Pagination -->
         
       </div>
-      <!-- 		End of Container -->
+
 
       <div class="butt">
         <button class="button-33" role="button">
@@ -256,58 +248,5 @@ label {
       integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8"
       crossorigin="anonymous"
     ></script>
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const content = document.querySelector(".content");
-        const itemsPerPage = 10;
-        let currentPage = 0;
-        const items = Array.from(content.getElementsByTagName("tr")).slice(1);
-
-        function showPage(page) {
-          const startIndex = page * itemsPerPage;
-          const endIndex = startIndex + itemsPerPage;
-          items.forEach((item, index) => {
-            item.classList.toggle("hidden", index < startIndex || index >= endIndex);
-          });
-          updateActiveButtonStates();
-        }
-
-        function createPageButtons() {
-          const totalPages = Math.ceil(items.length / itemsPerPage);
-          const paginationContainer = document.createElement("div");
-          const paginationDiv = document.body.appendChild(paginationContainer);
-          paginationContainer.classList.add("pagination");
-
-          // page buttons
-          for (let i = 0; i < totalPages; i++) {
-            const pageButton = document.createElement("button");
-            pageButton.textContent = i + 1;
-            pageButton.addEventListener("click", () => {
-              currentPage = i;
-              showPage(currentPage);
-              updateActiveButtonStates();
-            });
-
-            content.appendChild(paginationContainer);
-            paginationDiv.appendChild(pageButton);
-          }
-        }
-
-        function updateActiveButtonStates() {
-          const pageButtons = document.querySelectorAll(".pagination button");
-          pageButtons.forEach((button, index) => {
-            if (index === currentPage) {
-              button.classList.add("active");
-            } else {
-              button.classList.remove("active");
-            }
-          });
-        }
-
-        createPageButtons();
-        showPage(currentPage);
-      });
-
-    </script>
   </body>
 </html>

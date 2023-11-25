@@ -20,8 +20,6 @@ from cryptoapp import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.index,name="index"),
-    path('register/', views.register, name='register'),
-    path('register_save', views.register_save, name='register_save'),
-    path('send_email', views.send_email, name='send_email'),
-    path('temp/',views.temp,name="temp"),
+    path('under_ath_range',views.under_ath_range,name="under_ath_range"),
+    path('under_atl_range',views.under_atl_range,name="under_atl_range"),
 ]
