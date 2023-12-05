@@ -22,4 +22,8 @@ urlpatterns = [
     path('',views.index,name="index"),
     path('under_ath_range',views.under_ath_range,name="under_ath_range"),
     path('under_atl_range',views.under_atl_range,name="under_atl_range"),
+    path('register_user',views.register_user,name="register_user"),
+    path('save_register_user',views.save_register_user,name="save_register_user"),
+    path('verify_user/<str:id>',views.verify_user,name="verify_user"),
+    path('update_profile_details',views.update_profile_details,name="update_profile_details"),
 ]

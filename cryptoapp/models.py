@@ -1,6 +1,14 @@
 from django.db import models
 
 
+class Profile(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=255,null=False)
+    email = models.CharField(max_length=255,null=False)
+    is_verified = models.BooleanField(max_length=10,default=False)
+    daily_updates = models.BooleanField(max_length=10,default=False)
+    objects = models.Manager()
+
 class CoinDetail(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=50,unique=True,null=False)

@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-b*(dy$t7gcf!b_#bienepepp_(jwcvl)xl2it8k=w5^mo%v8qc
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition
@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'cryptoapp',
     'mathfilters',
+    "django_celery_results",
+    'django_celery_beat',
 ]
 
 
@@ -134,3 +136,35 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# EMAIL SETTINGS
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
+EMAIl_PORT = 587
+EMAIL_HOST_USER = "aartikumarisingh3002@gmail.com"
+EMAIL_HOST_PASSWORD = "iupzmpsrlfqhqfcq"
+EMAIL_USE_TLS = True
+
+
+# CELERY SETTINGS
+
+CELERY_BROKER_URL = 'redis://127.0.0.1:6379'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_BACKEND = 'django-db'
+CELERY_TIMEZONE = 'Asia/Kolkata'
+CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
+
+# REDIS CACHE
+
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": f"redis://127.0.0.1:6379/1",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        },
+    }
+}
